@@ -2,6 +2,9 @@ package edu.csc413.tankgame.model;
 
 import edu.csc413.tankgame.view.RunGameView;
 
+import javax.swing.*;
+import java.awt.event.ActionListener;
+
 /**
  * GameState represents the state of the game "world." The GameState object tracks all of the moving entities like tanks
  * and shells, and provides the controller of the program (i.e. the GameDriver) access to whatever information it needs
@@ -21,8 +24,22 @@ public class GameState {
     public static final String PLAYER_TANK_ID = "player-tank";
     public static final String AI_TANK_ID_NEUTRAL = "ai-tank";
     // TODO: Feel free to add more tank IDs if you want to support multiple AI tanks! Just make sure they're unique.
-    public static final String AI_TANK_ID_MIRROR = "ai-tank-mirror";
+    //public static final String AI_TANK_ID_MIRROR = "ai-tank-mirror";
+
     // TODO: Implement.
     // There's a lot of information the GameState will need to store to provide contextual information. Add whatever
     // instance variables, constructors, and methods are needed.
+    public static ActionListener Forward;
+    public static ActionListener Backward;
+    public static ActionListener Left;
+    public static ActionListener Right;
+
+    public static void movement(ActionListener actionListener) {
+        switch(actionListener){
+            case Forward:
+
+
+
+        }
+    }
 }

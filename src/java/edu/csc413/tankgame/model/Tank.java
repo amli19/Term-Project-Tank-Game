@@ -55,6 +55,10 @@ public class Tank {
 
     protected void turnLeft() {
         angle -= TURN_SPEED;
+        if(forward){
+            moveForward();
+        }
+        else{moveBackward();}
     }
 
     protected void turnRight() {
