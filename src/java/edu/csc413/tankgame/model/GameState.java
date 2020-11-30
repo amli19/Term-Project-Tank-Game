@@ -4,6 +4,9 @@ import edu.csc413.tankgame.view.RunGameView;
 
 import javax.swing.*;
 import java.awt.event.ActionListener;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Map;
 
 /**
  * GameState represents the state of the game "world." The GameState object tracks all of the moving entities like tanks
@@ -29,17 +32,7 @@ public class GameState {
     // TODO: Implement.
     // There's a lot of information the GameState will need to store to provide contextual information. Add whatever
     // instance variables, constructors, and methods are needed.
-    public static ActionListener Forward;
-    public static ActionListener Backward;
-    public static ActionListener Left;
-    public static ActionListener Right;
-
-    public static void movement(ActionListener actionListener) {
-        switch(actionListener){
-            case Forward:
+    private final Map<TankId, > tanks = new Map<>();
 
 
-
-        }
-    }
 }

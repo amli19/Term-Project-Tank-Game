@@ -25,8 +25,7 @@ public class GameDriver {
     private final GameState gameState;
 
     public GameDriver() {
-        //mainView = new MainView();
-        //runGameView = mainView.getRunGameView();
+
         ActionListener act = new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
@@ -41,40 +40,41 @@ public class GameDriver {
             }
         };
 
+        mainView = new MainView(act);
+        runGameView = mainView.getRunGameView();
+        gameState = new GameState();
         //KeyListener for movement input
 
-        KeyListener key = new KeyListener() {
-            @Override
-            public void keyTyped(KeyEvent e) {
+//        KeyListener key = new KeyListener() {
+//            @Override
+//            public void keyTyped(KeyEvent e) {
+//
+//            }
+//
+//            @Override
+//            public void keyPressed(KeyEvent e) {
+//                int keyC = e.getKeyCode();
+//                if(keyC==KeyEvent.VK_W){
+//                    gameState.movement(GameState.Forward);
+//                }
+//                if(keyC==KeyEvent.VK_S){
+//                    gameState.movement(GameState.Backward);
+//                }
+//                if(keyC==KeyEvent.VK_L){
+//                    gameState.movement(GameState.Left);
+//                }
+//                if(keyC==KeyEvent.VK_D){
+//                    gameState.movement(GameState.Right);
+//                }
+//
+//            }
+//
+//            @Override
+//            public void keyReleased(KeyEvent e) {
+//
+//            }
+//        };
 
-            }
-
-            @Override
-            public void keyPressed(KeyEvent e) {
-                int keyC = e.getKeyCode();
-                if(keyC==KeyEvent.VK_W){
-                    gameState.movement(GameState.Forward);
-                }
-                if(keyC==KeyEvent.VK_S){
-                    gameState.movement(GameState.Backward);
-                }
-                if(keyC==KeyEvent.VK_L){
-                    gameState.movement(GameState.Left);
-                }
-                if(keyC==KeyEvent.VK_D){
-                    gameState.movement(GameState.Right);
-                }
-
-
-
-
-            }
-
-            @Override
-            public void keyReleased(KeyEvent e) {
-
-            }
-        };
     }
 
     public void start() {
@@ -82,14 +82,15 @@ public class GameDriver {
         // This should set the MainView's screen to the start menu screen.
         mainView.setScreen(MainView.Screen.START_MENU_SCREEN);
 
+
     }
 
     private void runGame() {
         Tank playerTank = new Tank(
                 GameState.PLAYER_TANK_ID,
                 RunGameView.PLAYER_TANK_INITIAL_X,
-                RunGameView.AI_TANK_INITIAL_Y,
-                RunGameView.AI_TANK_INITIAL_ANGLE);
+                RunGameView.PLAYER_TANK_INITIAL_Y,
+                RunGameView.PLAYER_TANK_INITIAL_ANGLE);
         Tank aiTank = new Tank(
                 GameState.AI_TANK_ID_NEUTRAL,
                 RunGameView.AI_TANK_INITIAL_X,
@@ -105,7 +106,7 @@ public class GameDriver {
         );
         runGameView.addDrawableEntity(
                 GameState.AI_TANK_ID_NEUTRAL,
-                RunGameView.PLAYER_TANK_IMAGE_FILE,
+                RunGameView.AI_TANK_IMAGE_FILE,
                 aiTank.getX(),
                 aiTank.getY(),
                 aiTank.getAngle()
@@ -128,7 +129,7 @@ public class GameDriver {
     // should be updated accordingly. It should return true as long as the game continues.
     private boolean update() {
         //Ask all tank shells,etc to move
-
+        runGameView.setDrawableEntityLocationAndAngle(GameState.PLAYER_TANK_ID,x,300.0,Math.toRadians(45.8));
         //Ask to see if entity out of bounds
 
         //Check collisions

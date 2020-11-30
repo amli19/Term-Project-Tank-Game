@@ -14,7 +14,7 @@ public class Tank {
     private double x;
     private double y;
     private double angle;
-
+    private boolean forward;
     public Tank(String id, double x, double y, double angle) {
         this.id = id;
         this.x = x;
@@ -44,11 +44,13 @@ public class Tank {
     // controlled tank.
 
     protected void moveForward() {
+        forward=true;
         x += MOVEMENT_SPEED * Math.cos(angle);
         y += MOVEMENT_SPEED * Math.sin(angle);
     }
 
     protected void moveBackward() {
+        forward=false;
         x -= MOVEMENT_SPEED * Math.cos(angle);
         y -= MOVEMENT_SPEED * Math.sin(angle);
     }
@@ -63,6 +65,10 @@ public class Tank {
 
     protected void turnRight() {
         angle += TURN_SPEED;
+        if(forward){
+            moveForward();
+        }
+        else{moveBackward();}
     }
 
     // The following methods will be useful for determining where a shell should be spawned when it
