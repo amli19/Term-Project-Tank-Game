@@ -2,12 +2,9 @@ package edu.csc413.tankgame.model;
 
 import edu.csc413.tankgame.view.RunGameView;
 
-import javax.swing.*;
-import java.awt.event.ActionListener;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Map;
-
+import java.util.*;
+import java.util.Collection;
+import java.util.TreeMap;
 /**
  * GameState represents the state of the game "world." The GameState object tracks all of the moving entities like tanks
  * and shells, and provides the controller of the program (i.e. the GameDriver) access to whatever information it needs
@@ -32,7 +29,26 @@ public class GameState {
     // TODO: Implement.
     // There's a lot of information the GameState will need to store to provide contextual information. Add whatever
     // instance variables, constructors, and methods are needed.
-    private final Map<TankId, > tanks = new Map<>();
+    private int direction;
+    public static final int Forward = 1;
+    public static final int Backward = 2;
+    public static final int Left = 3;
+    public static final int Right = 4;
 
+    private final TreeMap<String, Entity> tanks = new TreeMap<>();
+    public void addTank(Entity tank) {
+        tanks.put(tank.getId(), tank);
+    }
+    public void movement(int direction){
+        this.direction=direction;
+        tanks.get(PLAYER_TANK_ID).move(this);
+    }
+    public Collection<Entity> getTanks(){
+        return tanks.values();
+    }
+
+    public int getDirection() {
+        return direction;
+    }
 
 }

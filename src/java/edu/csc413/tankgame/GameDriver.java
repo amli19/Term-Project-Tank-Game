@@ -1,7 +1,6 @@
 package edu.csc413.tankgame;
 
-import edu.csc413.tankgame.model.GameState;
-import edu.csc413.tankgame.model.Tank;
+import edu.csc413.tankgame.model.*;
 import edu.csc413.tankgame.view.MainView;
 import edu.csc413.tankgame.view.RunGameView;
 import edu.csc413.tankgame.view.StartMenuView;
@@ -45,35 +44,35 @@ public class GameDriver {
         gameState = new GameState();
         //KeyListener for movement input
 
-//        KeyListener key = new KeyListener() {
-//            @Override
-//            public void keyTyped(KeyEvent e) {
-//
-//            }
-//
-//            @Override
-//            public void keyPressed(KeyEvent e) {
-//                int keyC = e.getKeyCode();
-//                if(keyC==KeyEvent.VK_W){
-//                    gameState.movement(GameState.Forward);
-//                }
-//                if(keyC==KeyEvent.VK_S){
-//                    gameState.movement(GameState.Backward);
-//                }
-//                if(keyC==KeyEvent.VK_L){
-//                    gameState.movement(GameState.Left);
-//                }
-//                if(keyC==KeyEvent.VK_D){
-//                    gameState.movement(GameState.Right);
-//                }
-//
-//            }
-//
-//            @Override
-//            public void keyReleased(KeyEvent e) {
-//
-//            }
-//        };
+        KeyListener key = new KeyListener() {
+            @Override
+            public void keyTyped(KeyEvent e) {
+
+            }
+
+            @Override
+            public void keyPressed(KeyEvent e) {
+                int keyC = e.getKeyCode();
+                if(keyC==KeyEvent.VK_W){
+                    gameState.movement(GameState.Forward);
+                }
+                if(keyC==KeyEvent.VK_S){
+                    gameState.movement(GameState.Backward);
+                }
+                if(keyC==KeyEvent.VK_L){
+                    gameState.movement(GameState.Left);
+                }
+                if(keyC==KeyEvent.VK_D){
+                    gameState.movement(GameState.Right);
+                }
+
+            }
+
+            @Override
+            public void keyReleased(KeyEvent e) {
+
+            }
+        };
 
     }
 
@@ -86,12 +85,12 @@ public class GameDriver {
     }
 
     private void runGame() {
-        Tank playerTank = new Tank(
+        Entity playerTank = new PlayerTank(
                 GameState.PLAYER_TANK_ID,
                 RunGameView.PLAYER_TANK_INITIAL_X,
                 RunGameView.PLAYER_TANK_INITIAL_Y,
                 RunGameView.PLAYER_TANK_INITIAL_ANGLE);
-        Tank aiTank = new Tank(
+        Entity aiTank = new DefaultAITank(
                 GameState.AI_TANK_ID_NEUTRAL,
                 RunGameView.AI_TANK_INITIAL_X,
                 RunGameView.AI_TANK_INITIAL_Y,
@@ -121,6 +120,9 @@ public class GameDriver {
                 }
             }
         };
+        gameState.addTank(playerTank);
+        gameState.addTank(aiTank);
+
         new Thread(gameRunner).start();
     }
 
@@ -129,13 +131,26 @@ public class GameDriver {
     // should be updated accordingly. It should return true as long as the game continues.
     private boolean update() {
         //Ask all tank shells,etc to move
-        runGameView.setDrawableEntityLocationAndAngle(GameState.PLAYER_TANK_ID,x,300.0,Math.toRadians(45.8));
+
         //Ask to see if entity out of bounds
 
         //Check collisions
 
-        //updates locations as things mvoes
-        //runGameView.setDrawableEntityLocationAndAngle();
+        //updates locations as things moves
+
+        for(Entity tank: gameState.getTanks()){
+            if(tank.getId()!=(GameState.PLAYER_TANK_ID)) {
+                tank.move(gameState);
+            }
+        }
+
+        for(Entity tank : gameState.getTanks()){
+            runGameView.setDrawableEntityLocationAndAngle(
+                    tank.getId(),
+                    tank.getX(),
+                    tank.getY(),
+                    tank.getAngle());
+        }
         return true;
     }
 
