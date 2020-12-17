@@ -8,12 +8,36 @@ package edu.csc413.tankgame.model;
 // between the two classes so that the logic for e.g. moveForward, etc. are not duplicated.
 public abstract class Tank extends Entity{
     private static final double MOVEMENT_SPEED = 2.0;
-    private static final double TURN_SPEED = Math.toRadians(3.0);
+    private static final double height = 100.0;
+    private static final double width = 100.0;
+
+    public Tank(String id, double x, double y, double angle, double height, double width) {
+        super(id, x, y, angle,  height, width);
+    }
 
 
+    public boolean pressUp(){
+        return true;
+    }
+    public boolean pressDown(){
+        return true;
+    }
+    public boolean pressRight(){
+        return true;
+    }
+    public boolean pressLeft(){
+        return true;
+    }
+    public boolean pressSpace(){
+        return true;
+    }
+    public void shoot(GameState gameState){
+        //shoot bullet from that tank depending on ID
+        gameState.getEntityID();
 
-    public Tank(String id, double x, double y, double angle) {
-        super(id, x, y, angle);
+    }
+    public void move(GameState gameState){
+
     }
 
     // TODO: The methods below are provided so you don't have to do the math for movement. However, note that they are

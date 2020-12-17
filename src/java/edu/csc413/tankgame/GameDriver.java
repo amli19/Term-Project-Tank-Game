@@ -42,39 +42,39 @@ public class GameDriver {
         mainView = new MainView(act);
         runGameView = mainView.getRunGameView();
         gameState = new GameState();
-        //KeyListener for movement input
-
-        KeyListener key = new KeyListener() {
-            @Override
-            public void keyTyped(KeyEvent e) {
-
-            }
-
-            @Override
-            public void keyPressed(KeyEvent e) {
-                int keyC = e.getKeyCode();
-                if(keyC==KeyEvent.VK_W){
-                    gameState.movement(GameState.Forward);
-                }
-                if(keyC==KeyEvent.VK_S){
-                    gameState.movement(GameState.Backward);
-                }
-                if(keyC==KeyEvent.VK_L){
-                    gameState.movement(GameState.Left);
-                }
-                if(keyC==KeyEvent.VK_D){
-                    gameState.movement(GameState.Right);
-                }
-
-            }
-
-            @Override
-            public void keyReleased(KeyEvent e) {
-
-            }
-        };
-
+//        KeyListener key = new KeyListener() {
+//            @Override
+//            public void keyTyped(KeyEvent e) {
+//
+//            }
+//
+//            @Override
+//            public void keyPressed(KeyEvent e) {
+//                int keyC = e.getKeyCode();
+//                if(keyC==KeyEvent.VK_W){
+//                    gameState.move(GameState.);
+//                }
+//                if(keyC==KeyEvent.VK_S){
+//                    gameState.move(GameState.Backward);
+//                }
+//                if(keyC==KeyEvent.VK_L){
+//                    gameState.move(GameState.Left);
+//                }
+//                if(keyC==KeyEvent.VK_D){
+//                    gameState.move(GameState.Right);
+//                }
+//                if(keyC==KeyEvent.VK_ESCAPE){
+//                    mainView.setScreen(MainView.Screen.START_MENU_SCREEN);
+//                }
+//            }
+//
+//            @Override
+//            public void keyReleased(KeyEvent e) {
+//            }
+//        };
     }
+
+
 
     public void start() {
         // TODO: Implement.
@@ -89,12 +89,18 @@ public class GameDriver {
                 GameState.PLAYER_TANK_ID,
                 RunGameView.PLAYER_TANK_INITIAL_X,
                 RunGameView.PLAYER_TANK_INITIAL_Y,
-                RunGameView.PLAYER_TANK_INITIAL_ANGLE);
+                RunGameView.PLAYER_TANK_INITIAL_ANGLE,
+                RunGameView.PLAYER_TANK_LENGTH,
+                RunGameView.PLAYER_TANK_WIDTH);
         Entity aiTank = new DefaultAITank(
                 GameState.AI_TANK_ID_NEUTRAL,
                 RunGameView.AI_TANK_INITIAL_X,
                 RunGameView.AI_TANK_INITIAL_Y,
-                RunGameView.AI_TANK_INITIAL_ANGLE);
+                RunGameView.AI_TANK_INITIAL_ANGLE,
+                RunGameView.AI_TANK_LENGTH,
+                RunGameView.AI_TANK_WIDTH);
+
+
 
         runGameView.addDrawableEntity(
                 GameState.PLAYER_TANK_ID,
@@ -120,8 +126,8 @@ public class GameDriver {
                 }
             }
         };
-        gameState.addTank(playerTank);
-        gameState.addTank(aiTank);
+        gameState.addEntity(playerTank);
+        gameState.addEntity(aiTank);
 
         new Thread(gameRunner).start();
     }
@@ -138,18 +144,23 @@ public class GameDriver {
 
         //updates locations as things moves
 
-        for(Entity tank: gameState.getTanks()){
-            if(tank.getId()!=(GameState.PLAYER_TANK_ID)) {
-                tank.move(gameState);
+        for(Entity entity: gameState.getEntity()){
+            if(entity.getId()!=(GameState.PLAYER_TANK_ID)) {
+                entity.move(gameState);
+
+            }
+            if(entity.getId()==GameState.PLAYER_TANK_ID){
+
             }
         }
 
-        for(Entity tank : gameState.getTanks()){
+
+        for(Entity entity : gameState.getEntity()){
             runGameView.setDrawableEntityLocationAndAngle(
-                    tank.getId(),
-                    tank.getX(),
-                    tank.getY(),
-                    tank.getAngle());
+                    entity.getId(),
+                    entity.getX(),
+                    entity.getY(),
+                    entity.getAngle());
         }
         return true;
     }

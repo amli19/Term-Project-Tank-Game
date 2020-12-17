@@ -13,15 +13,19 @@ public class RunGameView extends JPanel {
     public static final double PLAYER_TANK_INITIAL_X = 250.0;
     public static final double PLAYER_TANK_INITIAL_Y = 200.0;
     public static final double PLAYER_TANK_INITIAL_ANGLE = Math.toRadians(0.0);
+    public static final double PLAYER_TANK_LENGTH = 100;
+    public static final double PLAYER_TANK_WIDTH = 100;
 
     public static final String AI_TANK_IMAGE_FILE = "ai-tank.png";
     public static final double AI_TANK_INITIAL_X = 700.0;
     public static final double AI_TANK_INITIAL_Y = 500.0;
     public static final double AI_TANK_INITIAL_ANGLE = Math.toRadians(180.0);
+    private static final double AI_TANK_MOVEMENT_SPEED = 2.0;
+    private static final double AI_TANK_TURN_SPEED = Math.toRadians(3.0);
+    public static final int AI_TANK_LENGTH = 100;
+    public static final int AI_TANK_WIDTH = 100;
 
-    public static final double AI_TANK_2_INITIAL_X = 700.0;
-    public static final double AI_TANK_2_INITIAL_Y = 200.0;
-    public static final double AI_TANK_2_INITIAL_ANGLE = Math.toRadians(180.0);
+
 
     public static final String SHELL_IMAGE_FILE = "shell.png";
 

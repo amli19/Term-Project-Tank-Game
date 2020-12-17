@@ -1,21 +1,29 @@
 package edu.csc413.tankgame.model;
 
+import java.awt.event.KeyEvent;
+import java.awt.event.KeyListener;
+
 public abstract class Entity {
     private final String id;
-    private double x;
-    private double y;
+    private static double x;
+    private static double y;
     private double angle;
-    private static final double MOVEMENT_SPEED = 2.0;
-    private static final double TURN_SPEED = Math.toRadians(3.0);
-    private boolean forward;
+    private double MOVEMENT_SPEED;
+    private double TURN_SPEED = Math.toRadians(3.0);
+    private double height;
+    private double width;
+    private boolean forward;//is also going forward?
     public abstract void move(GameState state);
 
 
-    public Entity(String id, double x, double y, double angle) {
+    public Entity(String id, double x, double y, double angle,  double height, double width) {
         this.id = id;
         this.x = x;
         this.y = y;
         this.angle = angle;
+        this.height=height;
+        this.width=width;
+
     }
 
     protected void moveForward() {
@@ -50,11 +58,11 @@ public abstract class Entity {
         return id;
     }
 
-    public double getX() {
+    public static double getX() {
         return x;
     }
 
-    public double getY() {
+    public static double getY() {
         return y;
     }
 
@@ -63,6 +71,13 @@ public abstract class Entity {
     }
 
 
+    public double getHeight() {
+        return height;
+    }
+
+    public double getWidth() {
+        return width;
+    }
 
     private double getShellX() {
         return getX() + 30.0 * (Math.cos(getAngle()) + 0.5);
@@ -71,6 +86,8 @@ public abstract class Entity {
     private double getShellY() {
         return getY() + 30.0 * (Math.sin(getAngle()) + 0.5);
     }
+
+
 
 
 }
