@@ -7,13 +7,16 @@ public abstract class Entity {
     private final String id;
     private static double x;
     private static double y;
-    private double angle;
+    private static double angle;
     private double MOVEMENT_SPEED;
     private double TURN_SPEED = Math.toRadians(3.0);
-    private double height;
-    private double width;
+    private static double height;
+    private static double width;
     private boolean forward;//is also going forward?
-    public abstract void move(GameState state);
+
+    public void move(GameState state){
+
+    }
 
 
     public Entity(String id, double x, double y, double angle,  double height, double width) {
@@ -25,6 +28,7 @@ public abstract class Entity {
         this.width=width;
 
     }
+
 
     protected void moveForward() {
         forward=true;
@@ -66,28 +70,23 @@ public abstract class Entity {
         return y;
     }
 
-    public double getAngle() {
+    public static double getAngle() {
         return angle;
     }
 
 
-    public double getHeight() {
+    public static double getHeight() {
         return height;
     }
 
-    public double getWidth() {
+    public static double getWidth() {
         return width;
     }
 
-    private double getShellX() {
-        return getX() + 30.0 * (Math.cos(getAngle()) + 0.5);
+
+
+
+    public void add(Entity entity) {
+
     }
-
-    private double getShellY() {
-        return getY() + 30.0 * (Math.sin(getAngle()) + 0.5);
-    }
-
-
-
-
 }

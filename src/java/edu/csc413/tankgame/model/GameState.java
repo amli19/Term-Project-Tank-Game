@@ -1,5 +1,6 @@
 package edu.csc413.tankgame.model;
 
+import edu.csc413.tankgame.ButtonPress;
 import edu.csc413.tankgame.view.RunGameView;
 
 
@@ -62,9 +63,8 @@ public class GameState {
 
 
 
-    public void move (GameState gameState){
+    ButtonPress buttonPress = new ButtonPress();
 
-    }
 
 
 

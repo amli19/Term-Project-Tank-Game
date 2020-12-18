@@ -42,14 +42,18 @@ public class GameDriver {
         mainView = new MainView(act);
         runGameView = mainView.getRunGameView();
         gameState = new GameState();
-//        KeyListener key = new KeyListener() {
-//            @Override
-//            public void keyTyped(KeyEvent e) {
-//
-//            }
-//
-//            @Override
-//            public void keyPressed(KeyEvent e) {
+
+
+//        ButtonPress buttonPress = new ButtonPress();
+//        buttonPress.keyPressed(act);
+        KeyListener key = new KeyListener() {
+            @Override
+            public void keyTyped(KeyEvent e) {
+
+            }
+
+            @Override
+            public void keyPressed(KeyEvent e) {
 //                int keyC = e.getKeyCode();
 //                if(keyC==KeyEvent.VK_W){
 //                    gameState.move(GameState.);
@@ -66,12 +70,12 @@ public class GameDriver {
 //                if(keyC==KeyEvent.VK_ESCAPE){
 //                    mainView.setScreen(MainView.Screen.START_MENU_SCREEN);
 //                }
-//            }
-//
-//            @Override
-//            public void keyReleased(KeyEvent e) {
-//            }
-//        };
+            }
+
+            @Override
+            public void keyReleased(KeyEvent e) {
+            }
+        };
     }
 
 
@@ -85,7 +89,7 @@ public class GameDriver {
     }
 
     private void runGame() {
-        Entity playerTank = new PlayerTank(
+        Entity PlayerTank = new PlayerTank(
                 GameState.PLAYER_TANK_ID,
                 RunGameView.PLAYER_TANK_INITIAL_X,
                 RunGameView.PLAYER_TANK_INITIAL_Y,
@@ -105,9 +109,9 @@ public class GameDriver {
         runGameView.addDrawableEntity(
                 GameState.PLAYER_TANK_ID,
                 RunGameView.PLAYER_TANK_IMAGE_FILE,
-                playerTank.getX(),
-                playerTank.getY(),
-                playerTank.getAngle()
+                PlayerTank.getX(),
+                PlayerTank.getY(),
+                PlayerTank.getAngle()
         );
         runGameView.addDrawableEntity(
                 GameState.AI_TANK_ID_NEUTRAL,
@@ -126,7 +130,7 @@ public class GameDriver {
                 }
             }
         };
-        gameState.addEntity(playerTank);
+        gameState.addEntity(PlayerTank);
         gameState.addEntity(aiTank);
 
         new Thread(gameRunner).start();
@@ -147,10 +151,6 @@ public class GameDriver {
         for(Entity entity: gameState.getEntity()){
             if(entity.getId()!=(GameState.PLAYER_TANK_ID)) {
                 entity.move(gameState);
-
-            }
-            if(entity.getId()==GameState.PLAYER_TANK_ID){
-
             }
         }
 
@@ -161,7 +161,12 @@ public class GameDriver {
                     entity.getX(),
                     entity.getY(),
                     entity.getAngle());
+            if(/*entity reaches edge of screen or is destroyed*/){
+                runGameView.reset();;
+            }
+
         }
+
         return true;
     }
 
