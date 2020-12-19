@@ -5,10 +5,12 @@ import edu.csc413.tankgame.view.MainView;
 import edu.csc413.tankgame.view.RunGameView;
 import edu.csc413.tankgame.view.StartMenuView;
 
+import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
+import java.util.List;
 
 /**
  * GameDriver is the primary controller class for the tank game. The game is launched from GameDriver.main, and
@@ -43,17 +45,17 @@ public class GameDriver {
         runGameView = mainView.getRunGameView();
         gameState = new GameState();
 
-
+        makeWalls();
 //        ButtonPress buttonPress = new ButtonPress();
 //        buttonPress.keyPressed(act);
-        KeyListener key = new KeyListener() {
-            @Override
-            public void keyTyped(KeyEvent e) {
-
-            }
-
-            @Override
-            public void keyPressed(KeyEvent e) {
+//        KeyListener key = new KeyListener() {
+//            @Override
+//            public void keyTyped(KeyEvent e) {
+//
+//            }
+//
+//            @Override
+//            public void keyPressed(KeyEvent e) {
 //                int keyC = e.getKeyCode();
 //                if(keyC==KeyEvent.VK_W){
 //                    gameState.move(GameState.);
@@ -70,15 +72,31 @@ public class GameDriver {
 //                if(keyC==KeyEvent.VK_ESCAPE){
 //                    mainView.setScreen(MainView.Screen.START_MENU_SCREEN);
 //                }
-            }
-
-            @Override
-            public void keyReleased(KeyEvent e) {
-            }
-        };
+//            }
+//
+//            @Override
+//            public void keyReleased(KeyEvent e) {
+//            }
+//        };
     }
 
+    public void makeWalls(){
+        WallImageInfo wall = new WallImageInfo("wall.txt", 0.0,0.0);
+        List<WallImageInfo> walls= wall.readWalls();
+        int id =0;
 
+        for (WallImageInfo wa : walls) {
+            wa.setId(wa.getImageFile()+Integer.toString(id));
+            runGameView.addDrawableEntity(
+                    wa.getId(),
+                    wa.getImageFile(),
+                    wa.getX(),
+                    wa.getY(),
+                    0.0
+                    );
+            id++;
+        }
+    }
 
     public void start() {
         // TODO: Implement.
@@ -93,18 +111,14 @@ public class GameDriver {
                 GameState.PLAYER_TANK_ID,
                 RunGameView.PLAYER_TANK_INITIAL_X,
                 RunGameView.PLAYER_TANK_INITIAL_Y,
-                RunGameView.PLAYER_TANK_INITIAL_ANGLE,
-                RunGameView.PLAYER_TANK_LENGTH,
-                RunGameView.PLAYER_TANK_WIDTH);
+                RunGameView.PLAYER_TANK_INITIAL_ANGLE
+);
         Entity aiTank = new DefaultAITank(
                 GameState.AI_TANK_ID_NEUTRAL,
                 RunGameView.AI_TANK_INITIAL_X,
                 RunGameView.AI_TANK_INITIAL_Y,
-                RunGameView.AI_TANK_INITIAL_ANGLE,
-                RunGameView.AI_TANK_LENGTH,
-                RunGameView.AI_TANK_WIDTH);
-
-
+                RunGameView.AI_TANK_INITIAL_ANGLE
+);
 
         runGameView.addDrawableEntity(
                 GameState.PLAYER_TANK_ID,
@@ -161,9 +175,9 @@ public class GameDriver {
                     entity.getX(),
                     entity.getY(),
                     entity.getAngle());
-            if(/*entity reaches edge of screen or is destroyed*/){
-                runGameView.reset();;
-            }
+//            if(/*entity reaches edge of screen or is destroyed*/){
+//                runGameView.reset();;
+//            }
 
         }
 
@@ -174,4 +188,5 @@ public class GameDriver {
         GameDriver gameDriver = new GameDriver();
         gameDriver.start();
     }
+
 }

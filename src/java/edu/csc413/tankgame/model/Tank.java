@@ -15,8 +15,8 @@ public abstract class Tank extends Entity{
     private boolean rightPress;
     private boolean leftPress;
     private boolean shootPress;
-    public Tank(String id, double x, double y, double angle, double height, double width) {
-        super(id, x, y, angle,  height, width);
+    public Tank(String id, double x, double y, double angle) {
+        super(id, x, y, angle);
     }
 
 
@@ -51,9 +51,9 @@ public abstract class Tank extends Entity{
 //        this.shootPress = false;
 //    }
 
-    public static void shoot(int x, int y, int angle,GameState gameState){
+    public void shoot(int x, int y, int angle, GameState gameState){
         //create bullet that will move in that angle
-        Shell shell = new Shell(gameState.getEntityID(),getShellX(),getShellY(),getAngle(),getHeight(),getWidth());
+        Shell shell = new Shell(gameState.getEntityID(),getShellX(),getShellY(),getAngle());
 
 
 
@@ -71,11 +71,11 @@ public abstract class Tank extends Entity{
 // The following methods will be useful for determining where a shell should be spawned when it
     // is created by this tank. It needs a slight offset so it appears from the front of the tank,
     // even if the tank is rotated. The shell should have the same angle as the tank.
-    private static double getShellX() {
+    private double getShellX() {
     return getX() + 30.0 * (Math.cos(getAngle()) + 0.5);
 }
 
-    private static double getShellY() {
+    private double getShellY() {
         return getY() + 30.0 * (Math.sin(getAngle()) + 0.5);
     }
 

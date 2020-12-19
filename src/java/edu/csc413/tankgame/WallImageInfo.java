@@ -1,5 +1,7 @@
 package edu.csc413.tankgame;
 
+import edu.csc413.tankgame.model.Entity;
+
 import java.io.IOException;
 import java.net.URISyntaxException;
 import java.net.URL;
@@ -11,7 +13,7 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 /** Stores the information associated with a wall that can be drawn in the game. */
-public class WallImageInfo {
+public class WallImageInfo extends Entity {
     private static final String WALL_IMAGE_FILE_PREFIX = "wall-";
     private static final String WALL_IMAGE_FILE_SUFFIX = ".png";
     private static final String WALLS_SETUP_FILE = "walls.txt";
@@ -22,11 +24,17 @@ public class WallImageInfo {
     private final double x;
     private final double y;
 
-    private WallImageInfo(String imageFile, double x, double y) {
+    public WallImageInfo(String imageFile, double x, double y) {
+        super(imageFile, x, y, 0);
         this.imageFile = imageFile;
         this.x = x;
         this.y = y;
     }
+
+//    public WallImageInfo(String imageFile, double x, double y) {
+//        super();
+
+//    }
 
     /** Returns the image file name for this wall. */
     public String getImageFile() {

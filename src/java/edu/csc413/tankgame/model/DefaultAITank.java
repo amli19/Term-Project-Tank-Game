@@ -4,8 +4,8 @@ package edu.csc413.tankgame.model;
 public class DefaultAITank extends Tank{
 
 
-    public DefaultAITank(String id, double x, double y, double angle,  int height, int width) {
-        super(id, x, y, angle,  height, width);
+    public DefaultAITank(String id, double x, double y, double angle) {
+        super(id, x, y, angle);
     }
     private static final double TURN_SPEED = Math.toRadians(3.0);
 

@@ -51,7 +51,9 @@ public class GameState {
     public String getEntityID(){
         return PLAYER_TANK_ID;
     }
-
+//    public Entity getID(String id){
+//        return entity.get(id);
+//    }
 
     public List<Entity> getEntity() {
         return entity;

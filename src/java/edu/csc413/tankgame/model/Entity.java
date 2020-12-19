@@ -1,10 +1,7 @@
 package edu.csc413.tankgame.model;
 
-import java.awt.event.KeyEvent;
-import java.awt.event.KeyListener;
-
 public abstract class Entity {
-    private final String id;
+    private String id;
     private static double x;
     private static double y;
     private static double angle;
@@ -15,17 +12,17 @@ public abstract class Entity {
     private boolean forward;//is also going forward?
 
     public void move(GameState state){
-
+        //state.getEntityID(GameState.AI_TANK_ID_NEUTRAL).move;
     }
 
 
-    public Entity(String id, double x, double y, double angle,  double height, double width) {
+    public Entity(String id, double x, double y, double angle/*8,  double height, double width*/) {
         this.id = id;
         this.x = x;
         this.y = y;
         this.angle = angle;
-        this.height=height;
-        this.width=width;
+//        this.height=height;
+//        this.width=width;
 
     }
 
@@ -61,12 +58,15 @@ public abstract class Entity {
     public String getId() {
         return id;
     }
+    public void setId(String id){
+            this.id=id;
+    }
 
-    public static double getX() {
+    public double getX() {
         return x;
     }
 
-    public static double getY() {
+    public double getY() {
         return y;
     }
 

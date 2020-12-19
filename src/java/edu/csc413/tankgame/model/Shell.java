@@ -21,8 +21,8 @@ public class Shell extends Entity{
     private double angle;
     private String shellOwner;
 
-    public Shell(String id, double x, double y, double angle, double height, double width) {
-        super(getUniqueId(), x, y, angle, height, width);
+    public Shell(String id, double x, double y, double angle) {
+        super(getUniqueId(), x, y, angle);
         this.id = getUniqueId();
         this.x =x;
         this.y=y;
